@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Volterra in Rust</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Quicksand:100,300,500"
+    />
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Lokta Volterra Equations Modelled in Rust</h1>
+    <form>
+      <label for="max-time">Max Time:</label>
+      <input type="text" id="time" name="mtime" value="" />
+      <br />
+
+      <label for="prey-pop">Prey Population:</label>
+      <input type="text" id="prey" name="preypop" value="" />
+      <br />
+
+      <label for="pred-pop">Predator Population:</label>
+      <input type="text" id="pred" name="predpop" value="" />
+      <br />
+
+      <label for="alpha">Alpha:</label>
+      <input type="text" id="alpha" name="alpha" value="" />
+      <br />
+
+      <label for="beta">Beta:</label>
+      <input type="text" id="beta" name="beta" value="" />
+      <br />
+
+      <label for="gamma">Gamma:</label>
+      <input type="text" id="gamma" name="gamma" value="" />
+      <br />
+
+      <label for="delta">Delta:</label>
+      <input type="text" id="delta" name="delta" value="" />
+      <br />
+    </form>
+    <button type="submit" id="volterra">Submit</button>
+    <table id="t1"></table>
+  </body>
+  <script type="text/javascript">
+    document.getElementById('volterra').addEventListener('click', async (e) => {
+      e.preventDefault()
+      try {
+        console.log('Starting')
+        let time = document.getElementById('time').value
+        let prey = document.getElementById('prey').value
+        let pred = document.getElementById('pred').value
+        let alpha = document.getElementById('alpha').value
+        let beta = document.getElementById('beta').value
+        let gamma = document.getElementById('gamma').value
+        let delta = document.getElementById('delta').value
+
+        if (!time || !prey || !pred || !alpha || !beta || !gamma || !delta) {
+          alert('Please enter all fields to continue.')
+          return
+        }
+
+        let res = await axios.post('/pred_prey', {
+          max_time: parseFloat(time),
+          prey_pop: parseFloat(prey),
+          pred_pop: parseFloat(pred),
+          alpha: parseFloat(alpha),
+          beta: parseFloat(beta),
+          gamma: parseFloat(gamma),
+          delta: parseFloat(delta),
+        })
+
+        function updateTable(res) {
+          let prey = res.prey_array
+          let pred = res.pred_array
+          document.getElementById('t1').innerHTML +=
+            '<tr><td>' + prey + '</td><td>' + pred + '</td></tr>'
+        }
+      } catch (e) {
+        console.log('ERROR FROM FORM REQUEST: ', e)
+      }
+    })
+  </script>
+</html>
