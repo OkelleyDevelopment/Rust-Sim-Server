@@ -13,43 +13,93 @@
   </head>
   <body>
     <h1>Lokta Volterra Equations Modelled in Rust</h1>
-    <form>
-      <label for="max-time">Max Time:</label>
-      <input type="text" id="time" name="mtime" value="" />
-      <br />
+    <div class="container">
+      <div class="works">
+        <h2>How it works?</h2>
+        <p>
+          After setting the parameters for the simulation and the submit button
+          is pressed, Axios sends a POST request to the Rust API server. The
+          server than uses Serde to process the incoming data to setup the
+          simulation.
+        </p>
+        <p>
+          Once the simulation has run it's course, the data is returned and
+          displayed on the right. Note, the formatting isn't perfect as these
+          HTML pages were added to show a potential use case that didn't require
+          installing an API tester.
+        </p>
+      </div>
+    </div>
 
-      <label for="prey-pop">Prey Population:</label>
-      <input type="text" id="prey" name="preypop" value="" />
-      <br />
+    <div class="container">
+      <div class="row">
+        <div class="column" id="inputs">
+          <form>
+            <label for="max-time">Max Time:</label>
+            <input type="text" id="time" name="mtime" value="" />
+            <br />
 
-      <label for="pred-pop">Predator Population:</label>
-      <input type="text" id="pred" name="predpop" value="" />
-      <br />
+            <label for="prey-pop">Prey Population:</label>
+            <input type="text" id="prey" name="preypop" value="" />
+            <br />
 
-      <label for="alpha">Alpha:</label>
-      <input type="text" id="alpha" name="alpha" value="" />
-      <br />
+            <label for="pred-pop">Predator Population:</label>
+            <input type="text" id="pred" name="predpop" value="" />
+            <br />
 
-      <label for="beta">Beta:</label>
-      <input type="text" id="beta" name="beta" value="" />
-      <br />
+            <label for="alpha">Alpha:</label>
+            <input type="text" id="alpha" name="alpha" value="" />
+            <br />
 
-      <label for="gamma">Gamma:</label>
-      <input type="text" id="gamma" name="gamma" value="" />
-      <br />
+            <label for="beta">Beta:</label>
+            <input type="text" id="beta" name="beta" value="" />
+            <br />
 
-      <label for="delta">Delta:</label>
-      <input type="text" id="delta" name="delta" value="" />
-      <br />
-    </form>
-    <button type="submit" id="volterra">Submit</button>
-    <table id="t1"></table>
+            <label for="gamma">Gamma:</label>
+            <input type="text" id="gamma" name="gamma" value="" />
+            <br />
+
+            <label for="delta">Delta:</label>
+            <input type="text" id="delta" name="delta" value="" />
+            <br />
+          </form>
+          <button type="submit" id="volterra">Submit</button>
+        </div>
+        <div class="column" id="output">
+          <h3>Prey Population</h3>
+          <table id="t1"></table>
+
+          <h3>Predator Population</h3>
+          <table id="t2"></table>
+        </div>
+      </div>
+      <p class="back-button"><a href="/">Back</a></p>
+    </div>
   </body>
   <script type="text/javascript">
     document.getElementById('volterra').addEventListener('click', async (e) => {
       e.preventDefault()
+    }
+    document.getElementById('volterra').addEventListener('click', async (e) => {
+      e.preventDefault()
+
+      function updateTable(res) {
+        let prey = res.data.prey_array
+        let pred = res.data.pred_array
+
+        prey.map(
+          (p) =>
+            (document.getElementById('t1').innerHTML +=
+              '<tr><td>' + p + '</td></tr>')
+        )
+        pred.map(
+          (p) =>
+            (document.getElementById('t2').innerHTML +=
+              '<tr><td>' + p + '</td></tr>')
+        )
+      }
+
       try {
-        console.log('Starting')
         let time = document.getElementById('time').value
         let prey = document.getElementById('prey').value
         let pred = document.getElementById('pred').value
@@ -73,12 +123,8 @@
           delta: parseFloat(delta),
         })
 
-        function updateTable(res) {
-          let prey = res.prey_array
-          let pred = res.pred_array
-          document.getElementById('t1').innerHTML +=
-            '<tr><td>' + prey + '</td><td>' + pred + '</td></tr>'
-        }
+        console.log(res)
+        updateTable(res)
       } catch (e) {
         console.log('ERROR FROM FORM REQUEST: ', e)
       }

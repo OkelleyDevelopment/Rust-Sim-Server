@@ -7,12 +7,48 @@
     <link href="/css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>Rusty Simulations</h1>
-    <h4>Other Pages</h4>
-    <ul>
-      <li><a href="/volterra">Volterra</a></li>
-      <li>Coming Soon</li>
-      <li>Coming Soon</li>
-    </ul>
+    <div class="container">
+      <h1>Rusty Simulations</h1>
+
+      <div class="row">
+        <div class="column">
+          <h3>Motivation</h3>
+          <p>
+            Developing simple web servers in various languages has become a
+            point of great learning for me in the last year or so. This project
+            merely reflects that interest combined with one of my favorite
+            programming languages: Rust.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <h3>Current Scope</h3>
+          <div id="motivation">
+            <p>
+              The Rust server is utilizing the Actix web framework along with
+              Serde and others to serve the html pages and needed CSS.
+            </p>
+            <p>
+              Also supported are a couple sample endpoints to demonstrate the
+              various simulations that could be built out and run. Currently an
+              implementation of the Volterra Predator-Prey simulation is the
+              only "major" simulation able to be run.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <h3>Other Pages</h3>
+          <div class="container">
+            <ul id="pages">
+              <li><a href="/volterra">Volterra</a></li>
+              <li>Another Simulation</li>
+              <li>A <em>third</em> Simulation (if we had one)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
