@@ -1,4 +1,4 @@
-# Rust API Server
+# Rust Simulation Server
 
 Author(s): Nicholas O'Kelley
 
