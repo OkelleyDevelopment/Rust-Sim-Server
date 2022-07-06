@@ -24,11 +24,7 @@ cargo run --release
 
 Then you will be able to access any of the service endpoints defined.
 
-NOTE: The app ships with some sample HTML that explains the scope / allows you to interact with the API without needing a fancy tester or separate frontend.
-
-## Known Bugs
-
-- The web pages are not fully functional, the focus was the API in Rust. At this time there are no plans to continue this frontend, however, a new one could be built to consume the data from this project.
+NOTE: The app ships with some sample HTML that explains the scope / allows you to interact with the API without needing a tester or separate frontend.
 
 ## Resources
 
