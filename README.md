@@ -16,13 +16,15 @@ mission critical for a few other ideas in the pipeline.
 You will need installed:
 
 - Rust
-- An API tester / frontend to consume the data
+- (optional) An API tester / frontend to consume the data
 
 ```
 cargo run --release
 ```
 
 Then you will be able to access any of the service endpoints defined.
+
+NOTE: The app ships with some sample HTML that explains the scope / allows you to interact with the API without needing a fancy tester or separate frontend.
 
 ## Known Bugs
 
