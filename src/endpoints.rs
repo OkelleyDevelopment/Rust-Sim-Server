@@ -14,23 +14,6 @@ pub async fn index() -> impl Responder {
         .content_type("text/html; charset=utf-8")
         .body(include_str!("../public/index.html"))
 }
-
-#[get("/volterra")]
-pub async fn volterra() -> impl Responder {
-    println!("[Server]: Served the Volterra Page");
-    HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .body(include_str!("../public/pred_prey.html"))
-}
-
-#[get("/index.js")]
-pub async fn indexjs() -> impl Responder {
-    println!("[Server]: Index JS Page");
-    HttpResponse::Ok()
-        .content_type("application/javascript; charset=utf-8")
-        .body(include_str!("../public/index.js"))
-}
-
 #[get("/css/style.css")]
 pub async fn styles() -> impl Responder {
     println!("[Server]: Style sheet");

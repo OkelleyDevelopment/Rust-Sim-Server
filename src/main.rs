@@ -8,7 +8,7 @@ use actix_web::{App, HttpServer};
 use rusty_server::{pred_prey::simulate_pred_prey, simulation::simulate_sim};
 
 mod endpoints;
-use endpoints::{hello, index, styles, indexjs, volterra};
+use endpoints::{hello, index, styles};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -18,8 +18,6 @@ async fn main() -> std::io::Result<()> {
             .service(hello)
             .service(index)
             .service(styles)
-            .service(volterra)
-            .service(indexjs)
             .service(simulate_sim)
             .service(simulate_pred_prey)
     })

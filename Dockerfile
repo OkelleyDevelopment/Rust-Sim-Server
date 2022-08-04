@@ -9,12 +9,12 @@ COPY ./Cargo.toml ./Cargo.toml
 RUN cargo build --release
 RUN rm src/*.rs
 
-COPY ./ ./
+COPY ./src ./src
+COPY ./public ./public
 
 RUN rm ./target/release/deps/rusty_server*
 RUN cargo build --release
 
-#FROM rust:1.58-slim-buster
 FROM debian:buster-slim
 
 COPY --from=build /rusty-server/target/release/rusty-server .

@@ -16,7 +16,14 @@ mission critical for a few other ideas in the pipeline.
 You will need installed:
 
 - Rust
-- (optional) An API tester / frontend to consume the data
+- API tester (Insomnia, Postman, curl, etc)
+
+Optional:
+
+- frontend to consume the data
+- Docker
+
+To run the project:
 
 ```
 cargo run --release
@@ -24,7 +31,23 @@ cargo run --release
 
 Then you will be able to access any of the service endpoints defined.
 
-NOTE: The app ships with some sample HTML that explains the scope / allows you to interact with the API without needing a tester or separate frontend.
+## Docker
+
+Build the project:
+
+```
+docker build . -t sim-serv
+```
+
+The resulting image will be about 79.5 MB as we transfer the final executable
+to a clean minimal image.
+
+```
+docker container run sim-serv
+```
+
+From here you would be able to reach any of the endpoints like above, but this
+time from a minified environment _without needing to install the Rust compiler locally_!
 
 ## Resources
 
